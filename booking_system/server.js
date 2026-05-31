@@ -5,7 +5,8 @@ const cors = require("cors");
 
 const {
     createEvent,
-    getEvents
+    getEvents,
+    deleteEvent
 } = require("./controllers/eventController");
 
 const {
@@ -44,6 +45,11 @@ app.post(
 app.get(
     "/events",
     getEvents
+);
+
+app.delete(
+    "/event/:id",
+    deleteEvent
 );
 
 app.post(

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
@@ -6,46 +6,64 @@ export const AddEvent = ()=>{
 
     const navigate = useNavigate();
 
-    const [event,setEvent] =
-    useState("");
+    const [event,setEvent] = useState("");
+    const [eventsList, setEventsList] = useState([]);
+    const [bookingsCount, setBookingsCount] = useState(0);
+
+    const API_URL = process.env.REACT_APP_API_URL || "http://localhost:8080";
+
+    const fetchData = async () => {
+        try {
+            const eventsRes = await axios.get(`${API_URL}/events`);
+            setEventsList(eventsRes.data);
+            
+            const bookingsRes = await axios.get(`${API_URL}/bookings`);
+            setBookingsCount(bookingsRes.data.length);
+        } catch (error) {
+            console.error("Error fetching admin data:", error);
+        }
+    };
+
+    useEffect(() => {
+        fetchData();
+    }, []);
 
     const addEventHandler =
     async()=>{
 
-        const API_URL = process.env.REACT_APP_API_URL || "http://localhost:8080";
+        if(!event) return alert("Please enter an event name");
 
         try{
 
             const body = {
-
                 event_id:Date.now(),
-
                 event_name:event
-
             };
 
-            await axios.post(
-
-                `${API_URL}/event`,
-
-                body
-
-            );
+            await axios.post(`${API_URL}/event`, body);
 
             alert("Event Added");
-
             setEvent("");
-            
-            navigate("/");
-
+            fetchData(); // Refresh the list
         }
 
         catch(error){
-
             console.error("Failed to add event:", error);
-
         }
 
+    };
+
+    const deleteEventHandler = async (id) => {
+        if(window.confirm("Are you sure you want to delete this event?")) {
+            try {
+                await axios.delete(`${API_URL}/event/${id}`);
+                alert("Event Deleted Successfully");
+                fetchData(); // Refresh the list
+            } catch (error) {
+                console.error("Failed to delete event:", error);
+                alert("Failed to delete event. Please check the console for details.");
+            }
+        }
     };
 
     return(
@@ -59,21 +77,21 @@ export const AddEvent = ()=>{
             <div className="stats-grid">
                 <div className="stat-card">
                     <span className="stat-value">
-                        <span style={{ fontSize: '24px' }}>📅</span> 03
+                        <span style={{ fontSize: '24px' }}>📅</span> {String(eventsList.length).padStart(2, '0')}
                     </span>
                     <span className="stat-label">Total Events</span>
                 </div>
                 <div className="stat-card">
                     <span className="stat-value">
-                        <span style={{ fontSize: '24px' }}>🎫</span> 12
+                        <span style={{ fontSize: '24px' }}>🎫</span> {String(bookingsCount).padStart(2, '0')}
                     </span>
                     <span className="stat-label">Total Bookings</span>
                 </div>
                 <div className="stat-card">
                     <span className="stat-value">
-                        <span style={{ fontSize: '24px' }}>💺</span> 45
+                        <span style={{ fontSize: '24px' }}>💺</span> {String(eventsList.length * 15).padStart(2, '0')}
                     </span>
-                    <span className="stat-label">Available Seats</span>
+                    <span className="stat-label">Total Seats</span>
                 </div>
             </div>
 
@@ -106,19 +124,39 @@ export const AddEvent = ()=>{
                 <div className="card">
                     <h2 style={{ fontSize: '18px', marginBottom: '20px' }}>Recent Events</h2>
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-                        {['Avengers: Endgame', 'Tech Conference 2026', 'Music Fest'].map((e, i) => (
-                            <div key={i} style={{ 
-                                padding: '12px', 
-                                background: '#F8FAFC', 
-                                borderRadius: '8px', 
-                                display: 'flex', 
-                                justifyContent: 'space-between',
-                                alignItems: 'center'
-                            }}>
-                                <span style={{ fontSize: '14px', fontWeight: '500' }}>{e}</span>
-                                <span style={{ fontSize: '10px', color: 'var(--success)', fontWeight: '700' }}>ACTIVE</span>
-                            </div>
-                        ))}
+                        {eventsList.length === 0 ? (
+                            <p style={{ fontSize: '14px', color: 'var(--text-secondary)' }}>No events yet.</p>
+                        ) : (
+                            eventsList.slice(0, 5).reverse().map((e) => (
+                                <div key={e.event_id} style={{ 
+                                    padding: '12px', 
+                                    background: '#F8FAFC', 
+                                    borderRadius: '8px', 
+                                    display: 'flex', 
+                                    justifyContent: 'space-between',
+                                    alignItems: 'center',
+                                    border: '1px solid var(--border)'
+                                }}>
+                                    <div>
+                                        <span style={{ fontSize: '14px', fontWeight: '500', display: 'block' }}>{e.event_name}</span>
+                                        <span style={{ fontSize: '10px', color: 'var(--success)', fontWeight: '700' }}>ACTIVE</span>
+                                    </div>
+                                    <button 
+                                        onClick={() => deleteEventHandler(e._id)}
+                                        style={{ 
+                                            background: '#FEE2E2', 
+                                            color: '#EF4444', 
+                                            padding: '6px 10px', 
+                                            borderRadius: '6px',
+                                            fontSize: '12px',
+                                            fontWeight: '600'
+                                        }}
+                                    >
+                                        Delete
+                                    </button>
+                                </div>
+                            ))
+                        )}
                     </div>
                 </div>
 
