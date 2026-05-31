@@ -5,22 +5,20 @@ export const BookingList = ()=>{
 
     const [bookings,setBookings] =
     useState([]);
+    const [events, setEvents] = useState([]);
 
-    const fetchBookings =
+    const fetchData =
     async()=>{
 
         try{
 
-            const response =
-            await axios.get(
+            const [bookingsRes, eventsRes] = await Promise.all([
+                axios.get("http://localhost:8080/bookings"),
+                axios.get("http://localhost:8080/events")
+            ]);
 
-                "http://localhost:8080/bookings"
-
-            );
-
-            setBookings(
-                response.data
-            );
+            setBookings(bookingsRes.data);
+            setEvents(eventsRes.data);
 
         }
 
@@ -34,9 +32,14 @@ export const BookingList = ()=>{
 
     useEffect(()=>{
 
-        fetchBookings();
+        fetchData();
 
     },[]);
+
+    const getEventName = (eventId) => {
+        const event = events.find(e => String(e.event_id) === String(eventId));
+        return event ? event.event_name : "Unknown Event";
+    };
 
     return(
 
@@ -55,7 +58,7 @@ export const BookingList = ()=>{
                         key={
                         booking.booking_id
                         }
-
+                        style={{ borderBottom: "1px solid #eee", padding: "10px" }}
                         >
 
                             <h3>
@@ -65,6 +68,10 @@ export const BookingList = ()=>{
                                 }
 
                             </h3>
+
+                            <p>
+                                <strong>Event:</strong> {getEventName(booking.event_id)}
+                            </p>
 
                             <p>
 

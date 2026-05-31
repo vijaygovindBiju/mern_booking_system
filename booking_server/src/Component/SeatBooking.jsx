@@ -88,7 +88,7 @@ export const SeatBooking = ()=>{
 
         <div>
 
-            <h1>Book Ticket</h1>
+            <h1>Book Ticket for {eventName || "Loading..."}</h1>
 
             <input
 
@@ -135,6 +135,34 @@ export const SeatBooking = ()=>{
                             {isBooked && <div style={{ fontSize: "8px" }}>TAKEN</div>}
 
                         </button>
+
+                    );
+
+                })
+            }
+            </div>
+
+            <h3>
+
+                Selected Seat :
+                {seat}
+
+            </h3>
+
+            <button
+            onClick={bookTicket}
+            disabled={!seat || !name}
+            >
+
+                Book Ticket
+
+            </button>
+
+        </div>
+
+    );
+
+};/button>
 
                     );
 
