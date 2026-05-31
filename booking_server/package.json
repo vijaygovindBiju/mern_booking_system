@@ -1,30 +1,19 @@
 {
-<<<<<<< HEAD
-  "name": "booking_server",
+  "name": "mern-booking-system",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "type": "commonjs",
-  "dependencies": {
-    "cors": "^2.8.6",
-    "express": "^5.2.1",
-    "mongoose": "^9.6.3"
-=======
-  "name": "booking_system",
-  "version": "0.1.0",
+  "description": "MERN Booking System",
+  "main": "server.js",
   "private": true,
   "dependencies": {
     "@testing-library/dom": "^10.4.1",
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.2",
     "@testing-library/user-event": "^13.5.0",
+    "axios": "^1.16.1",
+    "concurrently": "^9.1.2",
+    "cors": "^2.8.6",
+    "express": "^5.2.1",
+    "mongoose": "^9.6.3",
     "react": "^19.2.6",
     "react-dom": "^19.2.6",
     "react-router-dom": "^7.16.0",
@@ -32,7 +21,9 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "node server.js",
+    "client": "react-scripts start",
+    "dev": "concurrently \"npm run start\" \"npm run client\"",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -54,6 +45,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
->>>>>>> 4b62aeacecf1c0d5738db26da7ecac9fc7f5b0c3
   }
 }
