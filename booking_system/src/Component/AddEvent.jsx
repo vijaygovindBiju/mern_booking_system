@@ -1,10 +1,7 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 
 export const AddEvent = ()=>{
-
-    const navigate = useNavigate();
 
     const [event,setEvent] = useState("");
     const [eventsList, setEventsList] = useState([]);
@@ -12,7 +9,7 @@ export const AddEvent = ()=>{
 
     const API_URL = process.env.REACT_APP_API_URL || "http://localhost:8080";
 
-    const fetchData = async () => {
+    const fetchData = useCallback(async () => {
         try {
             const eventsRes = await axios.get(`${API_URL}/events`);
             setEventsList(eventsRes.data);
@@ -22,11 +19,11 @@ export const AddEvent = ()=>{
         } catch (error) {
             console.error("Error fetching admin data:", error);
         }
-    };
+    }, [API_URL]);
 
     useEffect(() => {
         fetchData();
-    }, []);
+    }, [fetchData]);
 
     const addEventHandler =
     async()=>{
