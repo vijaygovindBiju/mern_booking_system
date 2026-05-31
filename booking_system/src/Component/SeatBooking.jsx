@@ -67,62 +67,105 @@ export const SeatBooking = () => {
 
     if (!event_id) {
         return (
-            <div style={{ padding: "20px", textAlign: "center" }}>
-                <h2>No Event Selected</h2>
-                <p>Please go to the home page and select an event to book.</p>
-                <button onClick={() => navigate("/")}>Go to Events</button>
+            <div className="card" style={{ padding: "48px", textAlign: "center", maxWidth: '500px', margin: '40px auto' }}>
+                <h2 style={{ marginBottom: '16px' }}>No Event Selected</h2>
+                <p style={{ color: 'var(--text-secondary)', marginBottom: '24px' }}>Please go back to the home page and select an event to book.</p>
+                <button className="btn-primary" onClick={() => navigate("/")}>Go to Events</button>
             </div>
         );
     }
 
     return (
-        <div>
-            <h1>Book Ticket for {eventName || "Loading..."}</h1>
+        <div style={{ maxWidth: '800px' }}>
+            <header className="page-header">
+                <h1 className="page-title">Book Tickets</h1>
+            </header>
 
-            <input
-                placeholder="Name"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-            />
-
-            <h3>Select Seat</h3>
-
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(5, 1fr)", gap: "10px", maxWidth: "400px", margin: "20px 0" }}>
-                {
-                    seats.map((s) => {
-                        const isBooked = bookedSeats.includes(s);
-                        const isSelected = seat === s;
-
-                        return (
-                            <button
-                                key={s}
-                                onClick={() => setSeat(s)}
-                                disabled={isBooked}
-                                style={{
-                                    backgroundColor: isBooked ? "#ffcccc" : (isSelected ? "#4CAF50" : "#fff"),
-                                    color: isBooked ? "#990000" : (isSelected ? "#fff" : "#000"),
-                                    cursor: isBooked ? "not-allowed" : "pointer",
-                                    border: "1px solid #ccc",
-                                    padding: "10px",
-                                    borderRadius: "4px"
-                                }}
-                            >
-                                {s}
-                                {isBooked && <div style={{ fontSize: "8px" }}>TAKEN</div>}
-                            </button>
-                        );
-                    })
-                }
+            <div className="card" style={{ marginBottom: '24px' }}>
+                <h2 style={{ fontSize: '20px', marginBottom: '16px', color: 'var(--primary)' }}>
+                    {eventName || "Loading Event..."}
+                </h2>
+                
+                <div className="input-group">
+                    <label className="input-label">Attendee Name</label>
+                    <input
+                        className="input-field"
+                        placeholder="Enter your full name"
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                    />
+                </div>
             </div>
 
-            <h3>Selected Seat: {seat}</h3>
+            <div className="card">
+                <h3 style={{ fontSize: '16px', marginBottom: '24px', fontWeight: '600' }}>Select Your Seat</h3>
 
-            <button
-                onClick={bookTicket}
-                disabled={!seat || !name}
-            >
-                Book Ticket
-            </button>
+                <div style={{ 
+                    display: "grid", 
+                    gridTemplateColumns: "repeat(5, 1fr)", 
+                    gap: "12px", 
+                    maxWidth: "500px", 
+                    margin: "0 auto 32px auto",
+                    padding: '20px',
+                    background: '#F1F5F9',
+                    borderRadius: '16px'
+                }}>
+                    {
+                        seats.map((s) => {
+                            const isBooked = bookedSeats.includes(s);
+                            const isSelected = seat === s;
+
+                            return (
+                                <button
+                                    key={s}
+                                    onClick={() => setSeat(s)}
+                                    disabled={isBooked}
+                                    style={{
+                                        aspectRatio: '1',
+                                        display: 'flex',
+                                        flexDirection: 'column',
+                                        alignItems: 'center',
+                                        justifyContent: 'center',
+                                        fontSize: '14px',
+                                        fontWeight: '600',
+                                        borderRadius: '10px',
+                                        border: isSelected ? '2px solid var(--primary)' : '1px solid var(--border)',
+                                        backgroundColor: isBooked ? '#E2E8F0' : (isSelected ? '#EEF2FF' : '#FFFFFF'),
+                                        color: isBooked ? '#94A3B8' : (isSelected ? 'var(--primary)' : 'var(--text-primary)'),
+                                        cursor: isBooked ? "not-allowed" : "pointer",
+                                        transition: '0.2s'
+                                    }}
+                                >
+                                    {s}
+                                    {isBooked && <div style={{ fontSize: '8px', marginTop: '2px' }}>SOLD</div>}
+                                </button>
+                            );
+                        })
+                    }
+                </div>
+
+                <div style={{ 
+                    display: 'flex', 
+                    alignItems: 'center', 
+                    justifyContent: 'space-between',
+                    borderTop: '1px solid var(--border)',
+                    paddingTop: '24px'
+                }}>
+                    <div>
+                        <p style={{ fontSize: '14px', color: 'var(--text-secondary)' }}>Selected Seat</p>
+                        <p style={{ fontSize: '20px', fontWeight: '700', color: 'var(--primary)' }}>{seat || 'None'}</p>
+                    </div>
+
+                    <button
+                        className="btn-primary"
+                        onClick={bookTicket}
+                        disabled={!seat || !name}
+                        style={{ padding: '14px 40px' }}
+                    >
+                        Confirm Booking
+                    </button>
+                </div>
+            </div>
         </div>
     );
 };

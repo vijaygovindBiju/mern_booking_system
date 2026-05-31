@@ -30,51 +30,59 @@ function App() {
 
     <BrowserRouter>
 
-      <Navbar />
+      <div className="app-container">
 
-      <Routes>
+        <Navbar />
 
-        <Route
+        <main className="main-content">
 
-        path="/"
+          <Routes>
 
-        element={
-        <EventList />
-        }
+            <Route
 
-        />
+            path="/"
 
-        <Route
+            element={
+            <EventList />
+            }
 
-        path="/admin"
+            />
 
-        element={
-        <AddEvent />
-        }
+            <Route
 
-        />
+            path="/admin"
 
-        <Route
+            element={
+            <AddEvent />
+            }
 
-        path="/book/:event_id"
+            />
 
-        element={
-        <SeatBooking />
-        }
+            <Route
 
-        />
+            path="/book/:event_id"
 
-        <Route
+            element={
+            <SeatBooking />
+            }
 
-        path="/bookings"
+            />
 
-        element={
-        <BookingList />
-        }
+            <Route
 
-        />
+            path="/bookings"
 
-      </Routes>
+            element={
+            <BookingList />
+            }
+
+            />
+
+          </Routes>
+
+        </main>
+
+      </div>
 
     </BrowserRouter>
 

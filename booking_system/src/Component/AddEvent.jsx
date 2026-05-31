@@ -50,27 +50,35 @@ export const AddEvent = ()=>{
 
     return(
 
-        <div>
+        <div style={{ maxWidth: '600px' }}>
 
-            <h1>Add Event</h1>
+            <header className="page-header">
+                <h1 className="page-title">Admin Dashboard</h1>
+            </header>
 
-            <input
+            <div className="card">
+                
+                <h2 style={{ fontSize: '18px', marginBottom: '24px' }}>Add New Event</h2>
 
-                value={event}
+                <div className="input-group">
+                    <label className="input-label">Event Name</label>
+                    <input
+                        className="input-field"
+                        value={event}
+                        onChange={(e)=>setEvent(e.target.value)}
+                        placeholder="e.g. Summer Music Festival"
+                    />
+                </div>
 
-                onChange={(e)=>
-                setEvent(e.target.value)}
+                <button 
+                    className="btn-primary" 
+                    onClick={addEventHandler}
+                    style={{ width: '100%', padding: '14px' }}
+                >
+                    Create Event
+                </button>
 
-                placeholder="Event Name"
-
-            />
-
-            <button
-            onClick={addEventHandler}>
-
-                Add Event
-
-            </button>
+            </div>
 
         </div>
 

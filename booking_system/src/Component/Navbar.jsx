@@ -1,28 +1,33 @@
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 export const Navbar = ()=>{
 
     return(
 
-        <nav>
+        <aside className="sidebar">
 
-            <Link to="/">
-                Events
-            </Link>
+            <div className="sidebar-logo">
+                <div style={{ width: 32, height: 32, background: 'var(--primary)', borderRadius: 8 }}></div>
+                <span>Booking.io</span>
+            </div>
 
-            {" | "}
+            <nav className="sidebar-nav">
 
-            <Link to="/bookings">
-                Bookings
-            </Link>
+                <NavLink to="/" className={({isActive}) => `nav-link ${isActive ? 'active' : ''}`}>
+                    <span>Events</span>
+                </NavLink>
 
-            {" | "}
+                <NavLink to="/bookings" className={({isActive}) => `nav-link ${isActive ? 'active' : ''}`}>
+                    <span>Bookings</span>
+                </NavLink>
 
-            <Link to="/admin">
-                Admin
-            </Link>
+                <NavLink to="/admin" className={({isActive}) => `nav-link ${isActive ? 'active' : ''}`}>
+                    <span>Admin</span>
+                </NavLink>
 
-        </nav>
+            </nav>
+
+        </aside>
 
     );
 

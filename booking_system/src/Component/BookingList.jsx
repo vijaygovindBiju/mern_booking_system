@@ -47,50 +47,60 @@ export const BookingList = ()=>{
 
         <div>
 
-            <h1>Bookings</h1>
+            <header className="page-header">
+                <h1 className="page-title">My Bookings</h1>
+            </header>
 
-            {bookings.length === 0 ? <p>No bookings yet. Go book a ticket!</p> :
+            {bookings.length === 0 ? 
+                <div className="card" style={{ textAlign: 'center', padding: '48px' }}>
+                    <p style={{ color: 'var(--text-secondary)' }}>No bookings yet. Go book a ticket!</p>
+                </div> 
+                :
+                <div className="card-grid">
+                    {bookings.map((booking)=>{
 
-                bookings.map((booking)=>{
+                        return(
 
-                    return(
+                            <div key={booking.booking_id} className="card">
+                                
+                                <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '20px' }}>
+                                    <div style={{ 
+                                        width: '40px', 
+                                        height: '40px', 
+                                        borderRadius: '50%', 
+                                        background: '#EEF2FF', 
+                                        color: 'var(--primary)',
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        justifyContent: 'center',
+                                        fontWeight: '700'
+                                    }}>
+                                        {booking.user_name.charAt(0).toUpperCase()}
+                                    </div>
+                                    <div>
+                                        <h3 style={{ fontSize: '16px' }}>{booking.user_name}</h3>
+                                        <span className="badge badge-success">Confirmed</span>
+                                    </div>
+                                </div>
 
-                        <div
+                                <div style={{ borderTop: '1px solid var(--border)', paddingTop: '16px' }}>
+                                    <p style={{ fontSize: '14px', marginBottom: '8px' }}>
+                                        <strong style={{ color: 'var(--text-secondary)' }}>Event:</strong> 
+                                        <span style={{ marginLeft: '8px' }}>{getEventName(booking.event_id)}</span>
+                                    </p>
 
-                        key={
-                        booking.booking_id
-                        }
-                        style={{ borderBottom: "1px solid #eee", padding: "10px" }}
-                        >
+                                    <p style={{ fontSize: '14px' }}>
+                                        <strong style={{ color: 'var(--text-secondary)' }}>Seat:</strong>
+                                        <span style={{ marginLeft: '12px', fontWeight: '600', color: 'var(--primary)' }}>{booking.seat_number}</span>
+                                    </p>
+                                </div>
 
-                            <h3>
+                            </div>
 
-                                {
-                                booking.user_name
-                                }
+                        );
 
-                            </h3>
-
-                            <p>
-                                <strong>Event:</strong> {getEventName(booking.event_id)}
-                            </p>
-
-                            <p>
-
-                                Seat :
-
-                                {
-                                booking.seat_number
-                                }
-
-                            </p>
-
-                        </div>
-
-                    );
-
-                })
-
+                    })}
+                </div>
             }
 
         </div>
