@@ -12,22 +12,25 @@ export const SeatBooking = () => {
     const [eventName, setEventName] = useState("");
 
     const fetchEventData = useCallback(async () => {
+        const API_URL = process.env.REACT_APP_API_URL || "http://localhost:8080";
         try {
             // Fetch events to get the name
-            const eventsResponse = await axios.get(`${process.env.REACT_APP_API_URL}/events`);
+            const eventsResponse = await axios.get(`${API_URL}/events`);
             const currentEvent = eventsResponse.data.find(e => String(e.event_id) === String(event_id));
             if (currentEvent) {
                 setEventName(currentEvent.event_name);
+            } else {
+                setEventName("Event Not Found");
             }
 
             // Fetch bookings for seat availability
-            const bookingsResponse = await axios.get(`${process.env.REACT_APP_API_URL}/bookings`);
+            const bookingsResponse = await axios.get(`${API_URL}/bookings`);
             const currentEventBookings = bookingsResponse.data
                 .filter(b => String(b.event_id) === String(event_id))
                 .map(b => b.seat_number);
             setBookedSeats(currentEventBookings);
         } catch (error) {
-            console.log(error);
+            console.error("Error fetching booking data:", error);
         }
     }, [event_id]);
 
@@ -36,6 +39,7 @@ export const SeatBooking = () => {
     }, [fetchEventData]);
 
     const bookTicket = async () => {
+        const API_URL = process.env.REACT_APP_API_URL || "http://localhost:8080";
         try {
             const body = {
                 booking_id: Date.now(),
@@ -44,7 +48,7 @@ export const SeatBooking = () => {
                 seat_number: seat
             };
 
-            const response = await axios.post(`${process.env.REACT_APP_API_URL}/book`, body);
+            const response = await axios.post(`${API_URL}/book`, body);
             alert(response.data);
 
             if (response.data === "Booking Successful") {
@@ -60,6 +64,16 @@ export const SeatBooking = () => {
         "B1", "B2", "B3", "B4", "B5",
         "C1", "C2", "C3", "C4", "C5"
     ];
+
+    if (!event_id) {
+        return (
+            <div style={{ padding: "20px", textAlign: "center" }}>
+                <h2>No Event Selected</h2>
+                <p>Please go to the home page and select an event to book.</p>
+                <button onClick={() => navigate("/")}>Go to Events</button>
+            </div>
+        );
+    }
 
     return (
         <div>

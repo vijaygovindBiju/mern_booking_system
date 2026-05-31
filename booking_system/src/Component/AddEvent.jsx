@@ -12,6 +12,8 @@ export const AddEvent = ()=>{
     const addEventHandler =
     async()=>{
 
+        const API_URL = process.env.REACT_APP_API_URL || "http://localhost:8080";
+
         try{
 
             const body = {
@@ -24,7 +26,7 @@ export const AddEvent = ()=>{
 
             await axios.post(
 
-                `${process.env.REACT_APP_API_URL}/event`,
+                `${API_URL}/event`,
 
                 body
 
@@ -40,7 +42,7 @@ export const AddEvent = ()=>{
 
         catch(error){
 
-            console.log(error);
+            console.error("Failed to add event:", error);
 
         }
 

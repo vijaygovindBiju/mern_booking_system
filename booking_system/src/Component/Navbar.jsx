@@ -12,12 +12,6 @@ export const Navbar = ()=>{
 
             {" | "}
 
-            <Link to="/book">
-                Book Ticket
-            </Link>
-
-            {" | "}
-
             <Link to="/bookings">
                 Bookings
             </Link>

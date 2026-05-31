@@ -10,11 +10,13 @@ export const BookingList = ()=>{
     const fetchData =
     async()=>{
 
+        const API_URL = process.env.REACT_APP_API_URL || "http://localhost:8080";
+
         try{
 
             const [bookingsRes, eventsRes] = await Promise.all([
-                axios.get(`${process.env.REACT_APP_API_URL}/bookings`),
-                axios.get(`${process.env.REACT_APP_API_URL}/events`)
+                axios.get(`${API_URL}/bookings`),
+                axios.get(`${API_URL}/events`)
             ]);
 
             setBookings(bookingsRes.data);
@@ -24,7 +26,7 @@ export const BookingList = ()=>{
 
         catch(error){
 
-            console.log(error);
+            console.error("Failed to fetch bookings:", error);
 
         }
 
@@ -47,7 +49,7 @@ export const BookingList = ()=>{
 
             <h1>Bookings</h1>
 
-            {
+            {bookings.length === 0 ? <p>No bookings yet. Go book a ticket!</p> :
 
                 bookings.map((booking)=>{
 

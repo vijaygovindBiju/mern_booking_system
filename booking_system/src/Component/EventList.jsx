@@ -8,11 +8,13 @@ export const EventList = () => {
 
     const fetchEvents = async() => {
 
+        const API_URL = process.env.REACT_APP_API_URL || "http://localhost:8080";
+
         try{
 
             const response =
             await axios.get(
-                `${process.env.REACT_APP_API_URL}/events`
+                `${API_URL}/events`
             );
 
             setEvents(response.data);
@@ -21,7 +23,7 @@ export const EventList = () => {
 
         catch(error){
 
-            console.log(error);
+            console.error("Failed to fetch events:", error);
 
         }
 
@@ -39,7 +41,7 @@ export const EventList = () => {
 
             <h1>Events</h1>
 
-            {
+            {events.length === 0 ? <p>No events found. Go to Admin to add one!</p> :
                 events.map((event)=>{
 
                     return(
