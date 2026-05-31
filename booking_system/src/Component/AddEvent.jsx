@@ -58,23 +58,31 @@ export const AddEvent = ()=>{
 
             <div className="stats-grid">
                 <div className="stat-card">
-                    <span className="stat-value">03</span>
+                    <span className="stat-value">
+                        <span style={{ fontSize: '24px' }}>📅</span> 03
+                    </span>
                     <span className="stat-label">Total Events</span>
                 </div>
                 <div className="stat-card">
-                    <span className="stat-value">12</span>
+                    <span className="stat-value">
+                        <span style={{ fontSize: '24px' }}>🎫</span> 12
+                    </span>
                     <span className="stat-label">Total Bookings</span>
                 </div>
                 <div className="stat-card">
-                    <span className="stat-value">45</span>
+                    <span className="stat-value">
+                        <span style={{ fontSize: '24px' }}>💺</span> 45
+                    </span>
                     <span className="stat-label">Available Seats</span>
                 </div>
             </div>
 
-            <div style={{ display: 'grid', gridTemplateColumns: '1.5fr 1fr', gap: '32px' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'minmax(400px, 700px) 1fr', gap: '32px', alignItems: 'start' }}>
                 
                 <div className="card">
-                    <h2 style={{ fontSize: '18px', marginBottom: '24px' }}>Add New Event</h2>
+                    <h2 style={{ fontSize: '18px', marginBottom: '24px', display: 'flex', alignItems: 'center', gap: '10px' }}>
+                        <span>✨</span> Create New Event
+                    </h2>
 
                     <div className="input-group">
                         <label className="input-label">Event Name</label>
@@ -82,16 +90,16 @@ export const AddEvent = ()=>{
                             className="input-field"
                             value={event}
                             onChange={(e)=>setEvent(e.target.value)}
-                            placeholder="e.g. Summer Music Festival"
+                            placeholder="e.g. Marvel Movie Marathon"
                         />
                     </div>
 
                     <button 
                         className="btn-primary" 
                         onClick={addEventHandler}
-                        style={{ width: '100%', padding: '14px', borderRadius: '12px' }}
+                        style={{ width: '100%', padding: '16px', borderRadius: '12px', fontSize: '16px' }}
                     >
-                        Create Event
+                        Publish Event
                     </button>
                 </div>
 

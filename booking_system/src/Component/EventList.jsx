@@ -50,53 +50,73 @@ export const EventList = () => {
             </header>
 
             {events.length === 0 ? 
-                <div className="card" style={{ textAlign: 'center', padding: '48px' }}>
-                    <p style={{ color: 'var(--text-secondary)' }}>No events found. Go to Admin to add one!</p>
+                <div className="card" style={{ textAlign: 'center', padding: '64px 24px' }}>
+                    <div style={{ fontSize: '48px', marginBottom: '16px' }}>🎟</div>
+                    <h2 style={{ marginBottom: '8px' }}>No Events Available</h2>
+                    <p style={{ color: 'var(--text-secondary)' }}>Create your first event from the Admin Dashboard to get started.</p>
                 </div> 
                 :
                 <div className="card-grid">
-                    {events.map((event)=>{
+                    {events.map((event, index)=>{
+                        // Use unique Unsplash images for each card
+                        const imageUrl = `https://images.unsplash.com/photo-${[
+                            '1485846234645-a62644ef7467', // Cinema
+                            '1470225620780-dba8ba36b745', // Concert
+                            '1501281668745-f7f57925c3b4', // Event
+                            '1540039155733-5bb30b53aa14', // Festival
+                            '1524368535928-5b5e00ddc76b', // Music
+                            '1505236858219-8359eb29e329'  // Party
+                        ][index % 6]}?auto=format&fit=crop&q=80&w=400`;
 
                         return(
 
-                            <div key={event.event_id} className="card">
+                            <div key={event.event_id} className="card" style={{ padding: '0', overflow: 'hidden' }}>
 
                                 <div style={{ 
-                                    height: '160px', 
-                                    background: `linear-gradient(${Math.random() * 360}deg, #6366F1 0%, #A855F7 100%)`,
-                                    borderRadius: '16px',
-                                    marginBottom: '20px',
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                    justifyContent: 'center',
-                                    color: 'white',
-                                    fontSize: '40px',
-                                    boxShadow: 'inset 0 0 20px rgba(0,0,0,0.1)'
+                                    height: '180px', 
+                                    backgroundImage: `url(${imageUrl})`,
+                                    backgroundSize: 'cover',
+                                    backgroundPosition: 'center',
+                                    position: 'relative'
                                 }}>
-                                    ✨
+                                    <div style={{ 
+                                        position: 'absolute', 
+                                        top: '12px', 
+                                        right: '12px',
+                                        background: 'rgba(255,255,255,0.9)',
+                                        padding: '4px 10px',
+                                        borderRadius: '8px',
+                                        fontSize: '11px',
+                                        fontWeight: '700',
+                                        color: 'var(--primary)'
+                                    }}>
+                                        PREMIUM
+                                    </div>
                                 </div>
 
-                                <h3 style={{ marginBottom: '12px', fontSize: '18px' }}>
-                                    {event.event_name}
-                                </h3>
+                                <div style={{ padding: '20px' }}>
+                                    <h3 style={{ marginBottom: '12px', fontSize: '18px' }}>
+                                        {event.event_name}
+                                    </h3>
 
-                                <div style={{ marginBottom: '20px' }}>
-                                    <p style={{ fontSize: '13px', color: 'var(--text-secondary)', marginBottom: '6px', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                                        <span>📅</span> 25 June 2026
-                                    </p>
-                                    <p style={{ fontSize: '13px', color: 'var(--text-secondary)', marginBottom: '6px', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                                        <span>📍</span> Kochi, Kerala
-                                    </p>
-                                    <p style={{ fontSize: '13px', color: 'var(--primary)', fontWeight: '600', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                                        <span>🎟</span> 15 Seats Available
-                                    </p>
+                                    <div style={{ marginBottom: '20px' }}>
+                                        <p style={{ fontSize: '13px', color: 'var(--text-secondary)', marginBottom: '8px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                                            <span style={{ fontSize: '16px' }}>📅</span> 25 June 2026
+                                        </p>
+                                        <p style={{ fontSize: '13px', color: 'var(--text-secondary)', marginBottom: '8px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                                            <span style={{ fontSize: '16px' }}>📍</span> Kochi, Kerala
+                                        </p>
+                                        <p style={{ fontSize: '13px', color: 'var(--primary)', fontWeight: '600', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                                            <span style={{ fontSize: '16px' }}>🎟</span> 15 Seats Available
+                                        </p>
+                                    </div>
+                                    
+                                    <Link to={`/book/${event.event_id}`} style={{ display: 'block' }}>
+                                        <button className="btn-primary" style={{ width: '100%', borderRadius: '12px' }}>
+                                            Book Ticket
+                                        </button>
+                                    </Link>
                                 </div>
-                                
-                                <Link to={`/book/${event.event_id}`} style={{ display: 'block' }}>
-                                    <button className="btn-primary" style={{ width: '100%', borderRadius: '12px' }}>
-                                        Book Ticket
-                                    </button>
-                                </Link>
 
                             </div>
 

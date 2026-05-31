@@ -52,8 +52,10 @@ export const BookingList = ()=>{
             </header>
 
             {bookings.length === 0 ? 
-                <div className="card" style={{ textAlign: 'center', padding: '48px' }}>
-                    <p style={{ color: 'var(--text-secondary)' }}>No bookings yet. Go book a ticket!</p>
+                <div className="card" style={{ textAlign: 'center', padding: '64px 24px' }}>
+                    <div style={{ fontSize: '48px', marginBottom: '16px' }}>📭</div>
+                    <h2 style={{ marginBottom: '8px' }}>No Bookings Yet</h2>
+                    <p style={{ color: 'var(--text-secondary)' }}>You haven't made any bookings. Go to the Events page to find something exciting!</p>
                 </div> 
                 :
                 <div className="card-grid">
@@ -65,42 +67,53 @@ export const BookingList = ()=>{
                                 
                                 <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '20px' }}>
                                     <div style={{ 
-                                        width: '40px', 
-                                        height: '40px', 
-                                        borderRadius: '50%', 
-                                        background: '#EEF2FF', 
+                                        width: '44px', 
+                                        height: '44px', 
+                                        borderRadius: '12px', 
+                                        background: 'linear-gradient(135deg, #EEF2FF 0%, #E0E7FF 100%)', 
                                         color: 'var(--primary)',
                                         display: 'flex',
                                         alignItems: 'center',
                                         justifyContent: 'center',
-                                        fontWeight: '700'
+                                        fontWeight: '700',
+                                        fontSize: '18px'
                                     }}>
                                         {booking.user_name.charAt(0).toUpperCase()}
                                     </div>
                                     <div>
                                         <h3 style={{ fontSize: '16px' }}>{booking.user_name}</h3>
-                                        <span className="badge badge-success">Confirmed</span>
+                                        <span className="badge badge-success" style={{ fontSize: '10px' }}>Confirmed</span>
                                     </div>
                                 </div>
 
                                 <div style={{ borderTop: '1px solid var(--border)', paddingTop: '16px' }}>
-                                    <p style={{ fontSize: '13px', color: 'var(--text-secondary)', marginBottom: '8px' }}>
+                                    <p style={{ fontSize: '13px', color: 'var(--text-secondary)', marginBottom: '12px' }}>
                                         Booking ID: <span style={{ color: 'var(--text-primary)', fontWeight: '600' }}>#BK{booking.booking_id.toString().slice(-4)}</span>
                                     </p>
 
-                                    <p style={{ fontSize: '14px', marginBottom: '8px' }}>
-                                        <strong style={{ color: 'var(--text-secondary)' }}>Event:</strong> 
-                                        <span style={{ marginLeft: '8px' }}>{getEventName(booking.event_id)}</span>
+                                    <p style={{ fontSize: '14px', marginBottom: '10px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                                        <span style={{ fontSize: '16px' }}>🎬</span>
+                                        <strong style={{ color: 'var(--text-secondary)', fontWeight: '500' }}>Event:</strong> 
+                                        <span style={{ fontWeight: '600' }}>{getEventName(booking.event_id)}</span>
                                     </p>
 
-                                    <p style={{ fontSize: '14px', marginBottom: '8px' }}>
-                                        <strong style={{ color: 'var(--text-secondary)' }}>Seat:</strong>
-                                        <span style={{ marginLeft: '12px', fontWeight: '600', color: 'var(--primary)' }}>{booking.seat_number}</span>
+                                    <p style={{ fontSize: '14px', marginBottom: '10px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                                        <span style={{ fontSize: '16px' }}>💺</span>
+                                        <strong style={{ color: 'var(--text-secondary)', fontWeight: '500' }}>Seat:</strong>
+                                        <span style={{ fontWeight: '600', color: 'var(--primary)' }}>{booking.seat_number}</span>
                                     </p>
 
-                                    <p style={{ fontSize: '12px', color: 'var(--text-secondary)', marginTop: '12px' }}>
-                                        Booked On: 12 June 2026
-                                    </p>
+                                    <div style={{ 
+                                        marginTop: '16px', 
+                                        padding: '8px 12px', 
+                                        background: '#F8FAFC', 
+                                        borderRadius: '8px',
+                                        fontSize: '11px',
+                                        color: 'var(--text-secondary)',
+                                        textAlign: 'center'
+                                    }}>
+                                        🗓 Booked On: 12 June 2026
+                                    </div>
                                 </div>
 
                             </div>
