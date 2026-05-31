@@ -13,8 +13,8 @@ export const BookingList = ()=>{
         try{
 
             const [bookingsRes, eventsRes] = await Promise.all([
-                axios.get("http://localhost:8080/bookings"),
-                axios.get("http://localhost:8080/events")
+                axios.get(`${process.env.REACT_APP_API_URL}/bookings`),
+                axios.get(`${process.env.REACT_APP_API_URL}/events`)
             ]);
 
             setBookings(bookingsRes.data);

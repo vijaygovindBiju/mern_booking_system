@@ -12,7 +12,7 @@ export const EventList = () => {
 
             const response =
             await axios.get(
-                "http://localhost:8080/events"
+                `${process.env.REACT_APP_API_URL}/events`
             );
 
             setEvents(response.data);

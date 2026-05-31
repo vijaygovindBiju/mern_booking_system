@@ -24,7 +24,7 @@ export const AddEvent = ()=>{
 
             await axios.post(
 
-                "http://localhost:8080/event",
+                `${process.env.REACT_APP_API_URL}/event`,
 
                 body
 

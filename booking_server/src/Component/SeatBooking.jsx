@@ -14,14 +14,14 @@ export const SeatBooking = () => {
     const fetchEventData = async () => {
         try {
             // Fetch events to get the name
-            const eventsResponse = await axios.get("http://localhost:8080/events");
+            const eventsResponse = await axios.get(`${process.env.REACT_APP_API_URL}/events`);
             const currentEvent = eventsResponse.data.find(e => String(e.event_id) === String(event_id));
             if (currentEvent) {
                 setEventName(currentEvent.event_name);
             }
 
             // Fetch bookings for seat availability
-            const bookingsResponse = await axios.get("http://localhost:8080/bookings");
+            const bookingsResponse = await axios.get(`${process.env.REACT_APP_API_URL}/bookings`);
             const currentEventBookings = bookingsResponse.data
                 .filter(b => String(b.event_id) === String(event_id))
                 .map(b => b.seat_number);
@@ -44,7 +44,7 @@ export const SeatBooking = () => {
                 seat_number: seat
             };
 
-            const response = await axios.post("http://localhost:8080/book", body);
+            const response = await axios.post(`${process.env.REACT_APP_API_URL}/book`, body);
             alert(response.data);
 
             if (response.data === "Booking Successful") {

@@ -1,3 +1,4 @@
+require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
@@ -17,8 +18,7 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-const mongo_url =
-"mongodb+srv://dotrixxmaster_db_user:VLuOYQzkwry7gnZv@cluster0.lqvu2as.mongodb.net/ticketdb";
+const mongo_url = process.env.MONGODB_URI;
 
 mongoose.connect(mongo_url)
 
@@ -56,12 +56,13 @@ app.get(
     getBookings
 );
 
+const PORT = process.env.PORT || 8080;
 app.listen(
-    8080,
+    PORT,
     () => {
 
         console.log(
-            "Server Running"
+            `Server Running on port ${PORT}`
         );
 
     }
