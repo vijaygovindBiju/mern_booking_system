@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
 
@@ -12,6 +12,25 @@ export const SeatBooking = ()=>{
 
     const [seat,setSeat] =
     useState("");
+
+    const [bookedSeats, setBookedSeats] = useState([]);
+
+    const fetchBookedSeats = async () => {
+        try {
+            const response = await axios.get("http://localhost:8080/bookings");
+            // Filter bookings for this specific event
+            const currentEventBookings = response.data
+                .filter(b => String(b.event_id) === String(event_id))
+                .map(b => b.seat_number);
+            setBookedSeats(currentEventBookings);
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    useEffect(() => {
+        fetchBookedSeats();
+    }, [event_id]);
 
     const bookTicket =
     async()=>{
@@ -84,8 +103,11 @@ export const SeatBooking = ()=>{
 
             <h3>Select Seat</h3>
 
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(5, 1fr)", gap: "10px", maxWidth: "400px", margin: "20px 0" }}>
             {
                 seats.map((s)=>{
+                    const isBooked = bookedSeats.includes(s);
+                    const isSelected = seat === s;
 
                     return(
 
@@ -95,10 +117,22 @@ export const SeatBooking = ()=>{
 
                             onClick={()=>
                             setSeat(s)}
+                            
+                            disabled={isBooked}
+
+                            style={{
+                                backgroundColor: isBooked ? "#ffcccc" : (isSelected ? "#4CAF50" : "#fff"),
+                                color: isBooked ? "#990000" : (isSelected ? "#fff" : "#000"),
+                                cursor: isBooked ? "not-allowed" : "pointer",
+                                border: "1px solid #ccc",
+                                padding: "10px",
+                                borderRadius: "4px"
+                            }}
 
                         >
 
                             {s}
+                            {isBooked && <div style={{ fontSize: "8px" }}>TAKEN</div>}
 
                         </button>
 
@@ -106,6 +140,7 @@ export const SeatBooking = ()=>{
 
                 })
             }
+            </div>
 
             <h3>
 
@@ -115,7 +150,9 @@ export const SeatBooking = ()=>{
             </h3>
 
             <button
-            onClick={bookTicket}>
+            onClick={bookTicket}
+            disabled={!seat || !name}
+            >
 
                 Book Ticket
 
