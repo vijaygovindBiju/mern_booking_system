@@ -41,13 +41,6 @@ function App() {
               <span style={{ position: 'absolute', left: '14px', top: '10px', color: 'var(--text-secondary)' }}>🔍</span>
               <input type="text" className="search-input" placeholder="Search events, bookings..." />
             </div>
-            <div className="user-profile">
-              <span style={{ cursor: 'pointer' }}>☀️</span>
-              <span style={{ color: 'var(--border)' }}>|</span>
-              <span style={{ cursor: 'pointer' }}>🔔</span>
-              <div style={{ width: 32, height: 32, background: '#E2E8F0', borderRadius: '50%', display: 'flex', alignItems: 'center', justify: 'center' }}>👤</div>
-              <span>Vijay</span>
-            </div>
           </div>
 
           <Routes>

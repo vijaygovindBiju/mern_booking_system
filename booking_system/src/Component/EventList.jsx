@@ -57,38 +57,34 @@ export const EventList = () => {
                 </div> 
                 :
                 <div className="card-grid">
-                    {events.map((event, index)=>{
-                        // Use unique Unsplash images for each card
-                        const imageUrl = `https://images.unsplash.com/photo-${[
-                            '1485846234645-a62644ef7467', // Cinema
-                            '1470225620780-dba8ba36b745', // Concert
-                            '1501281668745-f7f57925c3b4', // Event
-                            '1540039155733-5bb30b53aa14', // Festival
-                            '1524368535928-5b5e00ddc76b', // Music
-                            '1505236858219-8359eb29e329'  // Party
-                        ][index % 6]}?auto=format&fit=crop&q=80&w=400`;
+                    {events.map((event)=>{
 
                         return(
 
                             <div key={event.event_id} className="card" style={{ padding: '0', overflow: 'hidden' }}>
 
                                 <div style={{ 
-                                    height: '180px', 
-                                    backgroundImage: `url(${imageUrl})`,
-                                    backgroundSize: 'cover',
-                                    backgroundPosition: 'center',
+                                    height: '140px', 
+                                    background: 'linear-gradient(135deg, #6366F1 0%, #A855F7 100%)',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    color: 'white',
+                                    fontSize: '32px',
                                     position: 'relative'
                                 }}>
+                                    🎬
                                     <div style={{ 
                                         position: 'absolute', 
                                         top: '12px', 
                                         right: '12px',
-                                        background: 'rgba(255,255,255,0.9)',
+                                        background: 'rgba(255,255,255,0.2)',
+                                        backdropFilter: 'blur(4px)',
                                         padding: '4px 10px',
                                         borderRadius: '8px',
-                                        fontSize: '11px',
+                                        fontSize: '10px',
                                         fontWeight: '700',
-                                        color: 'var(--primary)'
+                                        color: 'white'
                                     }}>
                                         PREMIUM
                                     </div>
