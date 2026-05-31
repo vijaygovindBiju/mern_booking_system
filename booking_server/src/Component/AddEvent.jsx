@@ -13,7 +13,7 @@ export const AddEvent = ()=>{
 
             const body = {
 
-                event_id:Math.random(),
+                event_id:Date.now(),
 
                 event_name:event
 

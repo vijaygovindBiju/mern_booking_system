@@ -20,7 +20,7 @@ export const SeatBooking = ()=>{
 
             const body = {
 
-                booking_id:Math.random(),
+                booking_id:Date.now(),
 
                 user_name:name,
 
