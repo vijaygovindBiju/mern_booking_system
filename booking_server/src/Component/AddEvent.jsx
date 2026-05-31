@@ -1,7 +1,10 @@
 import { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export const AddEvent = ()=>{
+
+    const navigate = useNavigate();
 
     const [event,setEvent] =
     useState("");
@@ -30,6 +33,8 @@ export const AddEvent = ()=>{
             alert("Event Added");
 
             setEvent("");
+            
+            navigate("/");
 
         }
 
