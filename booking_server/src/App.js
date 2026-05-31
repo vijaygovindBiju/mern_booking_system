@@ -56,7 +56,7 @@ function App() {
 
         <Route
 
-        path="/book"
+        path="/book/:event_id"
 
         element={
         <SeatBooking />

@@ -1,7 +1,11 @@
 import { useState } from "react";
 import axios from "axios";
+import { useParams, useNavigate } from "react-router-dom";
 
 export const SeatBooking = ()=>{
+
+    const { event_id } = useParams();
+    const navigate = useNavigate();
 
     const [name,setName] =
     useState("");
@@ -20,7 +24,7 @@ export const SeatBooking = ()=>{
 
                 user_name:name,
 
-                event_id:1,
+                event_id:event_id,
 
                 seat_number:seat
 
@@ -36,6 +40,10 @@ export const SeatBooking = ()=>{
             );
 
             alert(response.data);
+            
+            if(response.data === "Booking Successful") {
+                navigate("/bookings");
+            }
 
         }
 

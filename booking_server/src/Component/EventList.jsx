@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 export const EventList = () => {
 
@@ -45,11 +46,16 @@ export const EventList = () => {
 
                         <div
                         key={event.event_id}
+                        style={{ border: "1px solid #ccc", padding: "10px", margin: "10px" }}
                         >
 
                             <h3>
                                 {event.event_name}
                             </h3>
+                            
+                            <Link to={`/book/${event.event_id}`}>
+                                <button>Book Now</button>
+                            </Link>
 
                         </div>
 
