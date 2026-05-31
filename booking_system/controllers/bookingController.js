@@ -41,7 +41,8 @@ const createBooking = async(req,res)=>{
 
     catch(error){
 
-        res.send(error);
+        console.error("Booking Error:", error);
+        res.status(500).send("Internal Server Error during booking.");
 
     }
 
@@ -59,7 +60,8 @@ const getBookings = (req,res)=>{
 
     .catch((error)=>{
 
-        res.send(error);
+        console.error("Fetch Bookings Error:", error);
+        res.status(500).send("Could not fetch bookings.");
 
     });
 

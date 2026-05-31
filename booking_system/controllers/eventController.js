@@ -18,7 +18,8 @@ const createEvent = (req,res)=>{
 
     .catch((error)=>{
 
-        res.send(error);
+        console.error("Database Error:", error);
+        res.status(500).send("Database Error. Please check your connection.");
 
     });
 
@@ -36,7 +37,8 @@ const getEvents = (req,res)=>{
 
     .catch((error)=>{
 
-        res.send(error);
+        console.error("Database Error:", error);
+        res.status(500).send("Database Error. Please check your connection.");
 
     });
 

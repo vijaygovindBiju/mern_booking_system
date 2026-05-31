@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
 
@@ -11,7 +11,7 @@ export const SeatBooking = () => {
     const [bookedSeats, setBookedSeats] = useState([]);
     const [eventName, setEventName] = useState("");
 
-    const fetchEventData = async () => {
+    const fetchEventData = useCallback(async () => {
         try {
             // Fetch events to get the name
             const eventsResponse = await axios.get(`${process.env.REACT_APP_API_URL}/events`);
@@ -29,11 +29,11 @@ export const SeatBooking = () => {
         } catch (error) {
             console.log(error);
         }
-    };
+    }, [event_id]);
 
     useEffect(() => {
         fetchEventData();
-    }, [event_id]);
+    }, [fetchEventData]);
 
     const bookTicket = async () => {
         try {
