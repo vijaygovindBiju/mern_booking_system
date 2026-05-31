@@ -39,8 +39,14 @@ export const EventList = () => {
 
         <div>
 
-            <header className="page-header">
-                <h1 className="page-title">Available Events</h1>
+            <div className="hero-section">
+                <h1 className="hero-title">🎟 Welcome Back</h1>
+                <p className="hero-subtitle">Browse and book upcoming premium events near you.</p>
+            </div>
+
+            <header className="page-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <h1 className="page-title">Upcoming Events</h1>
+                <div style={{ fontSize: '14px', color: 'var(--text-secondary)' }}>Showing {events.length} events</div>
             </header>
 
             {events.length === 0 ? 
@@ -56,36 +62,38 @@ export const EventList = () => {
                             <div key={event.event_id} className="card">
 
                                 <div style={{ 
-                                    height: '140px', 
-                                    background: 'linear-gradient(135deg, #6366F1 0%, #A855F7 100%)',
-                                    borderRadius: '12px',
-                                    marginBottom: '16px',
+                                    height: '160px', 
+                                    background: `linear-gradient(${Math.random() * 360}deg, #6366F1 0%, #A855F7 100%)`,
+                                    borderRadius: '16px',
+                                    marginBottom: '20px',
                                     display: 'flex',
                                     alignItems: 'center',
                                     justifyContent: 'center',
                                     color: 'white',
-                                    fontSize: '32px'
+                                    fontSize: '40px',
+                                    boxShadow: 'inset 0 0 20px rgba(0,0,0,0.1)'
                                 }}>
-                                    🎬
+                                    ✨
                                 </div>
 
-                                <h3 style={{ marginBottom: '8px', fontSize: '18px' }}>
+                                <h3 style={{ marginBottom: '12px', fontSize: '18px' }}>
                                     {event.event_name}
                                 </h3>
 
-                                <p style={{ 
-                                    color: 'var(--text-secondary)', 
-                                    fontSize: '14px',
-                                    marginBottom: '20px',
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                    gap: '6px'
-                                }}>
-                                    <span style={{ color: 'var(--success)' }}>●</span> 15 Seats Available
-                                </p>
+                                <div style={{ marginBottom: '20px' }}>
+                                    <p style={{ fontSize: '13px', color: 'var(--text-secondary)', marginBottom: '6px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                                        <span>📅</span> 25 June 2026
+                                    </p>
+                                    <p style={{ fontSize: '13px', color: 'var(--text-secondary)', marginBottom: '6px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                                        <span>📍</span> Kochi, Kerala
+                                    </p>
+                                    <p style={{ fontSize: '13px', color: 'var(--primary)', fontWeight: '600', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                                        <span>🎟</span> 15 Seats Available
+                                    </p>
+                                </div>
                                 
                                 <Link to={`/book/${event.event_id}`} style={{ display: 'block' }}>
-                                    <button className="btn-primary" style={{ width: '100%' }}>
+                                    <button className="btn-primary" style={{ width: '100%', borderRadius: '12px' }}>
                                         Book Ticket
                                     </button>
                                 </Link>

@@ -8,7 +8,10 @@ export const Navbar = ()=>{
 
             <div className="sidebar-logo">
                 <div style={{ width: 32, height: 32, background: 'var(--primary)', borderRadius: 8 }}></div>
-                <span>Booking.io</span>
+                <div style={{ display: 'flex', flexDirection: 'column' }}>
+                    <span style={{ lineHeight: '1' }}>Booking.io</span>
+                    <span style={{ fontSize: '10px', color: 'var(--text-secondary)', fontWeight: '500' }}>Event Management</span>
+                </div>
             </div>
 
             <nav className="sidebar-nav">

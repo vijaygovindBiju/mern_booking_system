@@ -84,14 +84,22 @@ export const BookingList = ()=>{
                                 </div>
 
                                 <div style={{ borderTop: '1px solid var(--border)', paddingTop: '16px' }}>
+                                    <p style={{ fontSize: '13px', color: 'var(--text-secondary)', marginBottom: '8px' }}>
+                                        Booking ID: <span style={{ color: 'var(--text-primary)', fontWeight: '600' }}>#BK{booking.booking_id.toString().slice(-4)}</span>
+                                    </p>
+
                                     <p style={{ fontSize: '14px', marginBottom: '8px' }}>
                                         <strong style={{ color: 'var(--text-secondary)' }}>Event:</strong> 
                                         <span style={{ marginLeft: '8px' }}>{getEventName(booking.event_id)}</span>
                                     </p>
 
-                                    <p style={{ fontSize: '14px' }}>
+                                    <p style={{ fontSize: '14px', marginBottom: '8px' }}>
                                         <strong style={{ color: 'var(--text-secondary)' }}>Seat:</strong>
                                         <span style={{ marginLeft: '12px', fontWeight: '600', color: 'var(--primary)' }}>{booking.seat_number}</span>
+                                    </p>
+
+                                    <p style={{ fontSize: '12px', color: 'var(--text-secondary)', marginTop: '12px' }}>
+                                        Booked On: 12 June 2026
                                     </p>
                                 </div>
 
