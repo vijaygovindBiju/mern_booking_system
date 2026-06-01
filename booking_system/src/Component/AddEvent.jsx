@@ -7,7 +7,7 @@ export const AddEvent = ()=>{
     const [eventsList, setEventsList] = useState([]);
     const [bookingsCount, setBookingsCount] = useState(0);
 
-    const API_URL = process.env.REACT_APP_API_URL || "http://localhost:8080";
+    const API_URL = process.env.REACT_APP_API_URL || "http://127.0.0.1:8081";
 
     const fetchData = useCallback(async () => {
         try {

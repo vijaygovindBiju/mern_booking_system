@@ -5,14 +5,15 @@ import { useParams, useNavigate } from "react-router-dom";
 export const SeatBooking = () => {
     const { event_id } = useParams();
     const navigate = useNavigate();
+    const user = JSON.parse(localStorage.getItem("user"));
 
-    const [name, setName] = useState("");
+    const [name, setName] = useState(user ? user.username : "");
     const [seat, setSeat] = useState("");
     const [bookedSeats, setBookedSeats] = useState([]);
     const [eventName, setEventName] = useState("");
 
     const fetchEventData = useCallback(async () => {
-        const API_URL = process.env.REACT_APP_API_URL || "http://localhost:8080";
+        const API_URL = process.env.REACT_APP_API_URL || "http://127.0.0.1:8081";
         try {
             // Fetch events to get the name
             const eventsResponse = await axios.get(`${API_URL}/events`);
@@ -39,7 +40,7 @@ export const SeatBooking = () => {
     }, [fetchEventData]);
 
     const bookTicket = async () => {
-        const API_URL = process.env.REACT_APP_API_URL || "http://localhost:8080";
+        const API_URL = process.env.REACT_APP_API_URL || "http://127.0.0.1:8081";
         try {
             const body = {
                 booking_id: Date.now(),
@@ -93,6 +94,7 @@ export const SeatBooking = () => {
                         placeholder="Enter your full name"
                         value={name}
                         onChange={(e) => setName(e.target.value)}
+                        readOnly
                     />
                 </div>
             </div>

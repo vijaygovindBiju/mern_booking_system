@@ -6,11 +6,12 @@ export const BookingList = ()=>{
     const [bookings,setBookings] =
     useState([]);
     const [events, setEvents] = useState([]);
+    const user = JSON.parse(localStorage.getItem("user"));
 
     const fetchData =
     async()=>{
 
-        const API_URL = process.env.REACT_APP_API_URL || "http://localhost:8080";
+        const API_URL = process.env.REACT_APP_API_URL || "http://127.0.0.1:8081";
 
         try{
 
@@ -19,7 +20,12 @@ export const BookingList = ()=>{
                 axios.get(`${API_URL}/events`)
             ]);
 
-            setBookings(bookingsRes.data);
+            let allBookings = bookingsRes.data;
+            if (user && user.role === "user") {
+                allBookings = allBookings.filter(b => b.user_name === user.username);
+            }
+
+            setBookings(allBookings);
             setEvents(eventsRes.data);
 
         }
@@ -48,7 +54,9 @@ export const BookingList = ()=>{
         <div>
 
             <header className="page-header">
-                <h1 className="page-title">My Bookings</h1>
+                <h1 className="page-title">
+                    {user && user.role === "admin" ? "All Bookings" : "My Bookings"}
+                </h1>
             </header>
 
             {bookings.length === 0 ? 

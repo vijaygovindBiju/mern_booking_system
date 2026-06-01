@@ -5,10 +5,11 @@ import { Link } from "react-router-dom";
 export const EventList = () => {
 
     const [events,setEvents] = useState([]);
+    const user = JSON.parse(localStorage.getItem("user"));
 
     const fetchEvents = async() => {
 
-        const API_URL = process.env.REACT_APP_API_URL || "http://localhost:8080";
+        const API_URL = process.env.REACT_APP_API_URL || "http://127.0.0.1:8081";
 
         try{
 
@@ -107,11 +108,19 @@ export const EventList = () => {
                                         </p>
                                     </div>
                                     
-                                    <Link to={`/book/${event.event_id}`} style={{ display: 'block' }}>
-                                        <button className="btn-primary" style={{ width: '100%', borderRadius: '12px' }}>
-                                            Book Ticket
-                                        </button>
-                                    </Link>
+                                    {(!user || user.role === "user") && (
+                                        <Link to={`/book/${event.event_id}`} style={{ display: 'block' }}>
+                                            <button className="btn-primary" style={{ width: '100%', borderRadius: '12px' }}>
+                                                Book Ticket
+                                            </button>
+                                        </Link>
+                                    )}
+                                    
+                                    {user && user.role === "admin" && (
+                                        <div style={{ textAlign: 'center', color: 'var(--text-secondary)', fontSize: '13px', fontStyle: 'italic' }}>
+                                            View only mode
+                                        </div>
+                                    )}
                                 </div>
 
                             </div>

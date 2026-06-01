@@ -24,7 +24,14 @@ from "./Component/SeatBooking";
 import { BookingList }
 from "./Component/BookingList";
 
+import { Login }
+from "./Component/Login";
+
+import { Signup }
+from "./Component/Signup";
+
 function App() {
+  const user = JSON.parse(localStorage.getItem("user"));
 
   return (
 
@@ -46,6 +53,16 @@ function App() {
           <Routes>
 
             <Route
+            path="/login"
+            element={<Login />}
+            />
+
+            <Route
+            path="/signup"
+            element={<Signup />}
+            />
+
+            <Route
 
             path="/"
 
@@ -60,7 +77,7 @@ function App() {
             path="/admin"
 
             element={
-            <AddEvent />
+              user && user.role === "admin" ? <AddEvent /> : <Login />
             }
 
             />
@@ -70,7 +87,7 @@ function App() {
             path="/book/:event_id"
 
             element={
-            <SeatBooking />
+              user && user.role === "user" ? <SeatBooking /> : <Login />
             }
 
             />
@@ -80,7 +97,7 @@ function App() {
             path="/bookings"
 
             element={
-            <BookingList />
+              user ? <BookingList /> : <Login />
             }
 
             />

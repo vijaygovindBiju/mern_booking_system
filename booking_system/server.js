@@ -14,10 +14,21 @@ const {
     getBookings
 } = require("./controllers/bookingController");
 
+const {
+    signup,
+    login
+} = require("./controllers/userController");
+
 const app = express();
 
 app.use(express.json());
 app.use(cors());
+
+// Debugging middleware
+app.use((req, res, next) => {
+    console.log(`${req.method} request to ${req.url}`);
+    next();
+});
 
 const mongo_url = process.env.MONGODB_URI;
 
@@ -62,7 +73,19 @@ app.get(
     getBookings
 );
 
-const PORT = process.env.PORT || 8080;
+app.get("/test", (req, res) => res.send("test ok"));
+
+app.post(
+    "/signup",
+    signup
+);
+
+app.post(
+    "/login",
+    login
+);
+
+const PORT = process.env.PORT || 8081;
 app.listen(
     PORT,
     () => {
