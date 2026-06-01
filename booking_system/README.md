@@ -1,70 +1,57 @@
-# Getting Started with Create React App
+# MERN Event Booking System with RBAC
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A full-stack Event Booking System built using the MERN stack (MongoDB, Express, React, Node.js) featuring Role-Based Access Control (RBAC).
 
-## Available Scripts
+## 🚀 Features
 
-In the project directory, you can run:
+- **User Authentication**: Secure Signup and Login functionality.
+- **Role-Based Access Control (RBAC)**:
+  - **Admin**: Can create and delete events, and view all bookings across the system.
+  - **User**: Can browse events, book seats, and view their personal booking history.
+- **Dynamic UI**: Navbar and routes adapt automatically based on the logged-in user's role.
+- **Real-time Validation**: Prevents double-booking of the same seat for the same event.
+- **Modern UI**: Clean, responsive design with interactive seat selection.
 
-### `npm start`
+## 🛠 Tech Stack
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- **Frontend**: React.js, React Router, Axios, Vanilla CSS.
+- **Backend**: Node.js, Express.js.
+- **Database**: MongoDB (via Mongoose).
+- **Architecture**: RESTful API.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## 📋 API Endpoints
 
-### `npm test`
+### Authentication
+- `POST /signup`: Create a new user (Role: user/admin).
+- `POST /login`: Authenticate user and start session.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Events
+- `GET /events`: Fetch all available events (Public).
+- `POST /event`: Create a new event (Admin only).
+- `DELETE /event/:id`: Remove an event by ID (Admin only).
 
-### `npm run build`
+### Bookings
+- `POST /book`: Reserve a seat for an event (User only).
+- `GET /bookings`: Fetch bookings (Filtered for Users, full list for Admins).
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## ⚙️ Setup & Installation
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+1. **Clone the repository**
+2. **Backend Configuration**:
+   - Navigate to `booking_system/`
+   - Create a `.env` file and add your `MONGODB_URI`.
+   - The server defaults to port **8081**.
+3. **Install Dependencies**:
+   ```bash
+   cd booking_system
+   npm install
+   ```
+4. **Run the Application**:
+   ```bash
+   npm run dev
+   ```
+   - Frontend runs on: `http://localhost:3000`
+   - Backend runs on: `http://localhost:8081`
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## 🛡 Security Note
+This project currently uses plain-text password storage for simplicity and demonstration purposes. For production use, it is highly recommended to implement password hashing (e.g., bcrypt) and token-based authentication (JWT).
