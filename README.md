@@ -1,102 +1,112 @@
 # MERN Booking System
 
-A full-stack booking system built with the MERN stack (MongoDB, Express, React, and Node.js).
+A full-stack event booking application built with **MongoDB, Express, React, and Node.js**, featuring event management, interactive seat selection, and booking management.
 
-## Table of Contents
+## Overview
 
-- [Features](#features)
-- [Tech Stack](#tech-stack)
-- [Prerequisites](#prerequisites)
-- [Installation](#installation)
-- [Usage](#usage)
-- [Project Structure](#project-structure)
-- [Contributing](#contributing)
+This project demonstrates a complete client-server application with a React frontend, Express/Node.js backend, and MongoDB persistence layer.
 
 ## Features
 
-- **Event Management**: Add and view upcoming events.
-- **Seat Booking**: Interactive seat selection for events.
-- **Booking Management**: View and manage bookings.
-- **Responsive UI**: Built with React and CSS for a smooth user experience.
+- Event creation and listing
+- Upcoming-event browsing
+- Interactive seat selection
+- Booking management
+- Responsive React interface
+- REST-style backend communication
+- MongoDB persistence through Mongoose
+
+## Architecture
+
+```text
+React Client
+    │
+    │ HTTP / Axios
+    ▼
+Express + Node.js API
+    │
+    │ Mongoose
+    ▼
+MongoDB
+```
+
+The frontend is responsible for presentation and user interaction, while the backend handles application logic, API endpoints, and database access.
 
 ## Tech Stack
 
-- **Frontend**: React (v19), Axios, React Router DOM, CSS.
-- **Backend**: Node.js, Express.
-- **Database**: MongoDB (via Mongoose).
-- **Utilities**: Concurrently (to run backend and frontend together), Dotenv, CORS.
-
-## Prerequisites
-
-- Node.js installed on your machine.
-- MongoDB instance (local or Atlas).
-
-## Installation
-
-1. Clone the repository:
-   ```bash
-   git clone <repository-url>
-   cd mern_booking_system
-   ```
-
-2. Navigate to the project directory:
-   ```bash
-   cd booking_system
-   ```
-
-3. Install dependencies:
-   ```bash
-   npm install
-   ```
-
-4. Set up environment variables:
-   Create a `.env` file in the `booking_system` directory based on `.env.example`.
-   ```bash
-   cp .env.example .env
-   ```
-   Add your MongoDB URI and other configurations to the `.env` file.
-
-## Usage
-
-In the `booking_system` directory, you can run:
-
-### `npm run dev`
-
-Runs both the backend server and the frontend React application concurrently in development mode.
-- Frontend: [http://localhost:3000](http://localhost:3000)
-- Backend: [http://localhost:8080](http://localhost:8080) (default)
-
-### `npm start`
-
-Runs only the backend server using `node server.js`.
-
-### `npm run client`
-
-Runs only the frontend application using `react-scripts start`.
-
-### `npm run build`
-
-Builds the frontend for production.
+- **Frontend:** React 19, Axios, React Router DOM, CSS
+- **Backend:** Node.js, Express
+- **Database:** MongoDB, Mongoose
+- **Configuration:** dotenv
+- **Development:** concurrently, CORS
 
 ## Project Structure
 
 ```text
 mern_booking_system/
-├── booking_system/
-│   ├── controllers/      # Backend logic
-│   ├── models/           # Mongoose schemas
-│   ├── src/              # React frontend source
-│   │   ├── Component/    # UI Components
-│   │   └── App.js        # Main React component
-│   ├── server.js         # Backend entry point
-│   └── package.json      # Dependencies and scripts
-└── image/                # Project assets (images/screenshots)
+└── booking_system/
+    ├── controllers/       # Backend application logic
+    ├── models/            # Mongoose schemas
+    ├── src/               # React frontend
+    │   ├── Component/     # UI components
+    │   └── App.js         # Frontend entry component
+    ├── server.js          # Backend entry point
+    └── package.json       # Dependencies and scripts
 ```
 
-## Contributing
+## Getting Started
 
-1. Fork the project.
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`).
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`).
-4. Push to the branch (`git push origin feature/AmazingFeature`).
-5. Open a Pull Request.
+### Prerequisites
+
+- Node.js
+- npm
+- MongoDB locally or through MongoDB Atlas
+
+### Installation
+
+```bash
+git clone https://github.com/vijaygovindBiju/mern_booking_system.git
+cd mern_booking_system/booking_system
+npm install
+```
+
+Create the environment file:
+
+```bash
+cp .env.example .env
+```
+
+Configure the MongoDB connection and other required values in `.env`.
+
+### Run in development
+
+```bash
+npm run dev
+```
+
+The development scripts start the backend and React client together.
+
+### Other commands
+
+```bash
+npm start       # Backend only
+npm run client  # Frontend only
+npm run build   # Production frontend build
+```
+
+## Engineering Focus
+
+This project was built to practice full-stack application development, including frontend routing, API communication, server-side application logic, database modeling, and environment-based configuration.
+
+## Future Improvements
+
+- Authentication and authorization
+- Stronger server-side validation
+- Payment integration
+- Booking cancellation and refund flows
+- Improved seat-locking/concurrency handling
+- Automated tests
+
+## License
+
+Educational and portfolio project.
